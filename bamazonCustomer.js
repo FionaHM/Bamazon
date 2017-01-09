@@ -34,15 +34,15 @@ function placeOrder(){
 				name: "itemID",
 				message: "Which item would you like to order (input Item ID):",
 				validate: function(str){
-					return isNaN(str) === false;  // make sure it is not empty
-				}
+					return isNaN(str) === false;  // make sure it is a number
+				},
 			},
 			{
 				type: "input",
 				name: "itemQty",
 				message: "How many units of this item would you like to order (input quantity):",
 				validate: function(str){
-					return isNaN(str) === false;  // make sure it is not empty
+					return isNaN(str) === false;  // make sure it is a number
 				},
 			}
 		]).then(function(answers){

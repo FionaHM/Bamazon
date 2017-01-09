@@ -23,6 +23,4 @@ INSERT INTO products (product_name, department_name, price, stock_quantity ) val
 ("Disney/Pixar Toy Story Talking Jessie", "TOYS", 16.17, 10),
 ("Paw Patrol - Rescue Racer - Jungle Chase", "TOYS", 4.72, 100);
 
-select item_id from products
-
-
+drop table products 

@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	port: 3306,
 	user: 'root',
-	password: '****',  // remove before handing in!
+	password: '01B00tKamp09',  // remove before handing in!
 	database: 'bamazon_db'
 });
 
@@ -76,7 +76,8 @@ var product = function(name, department, price, quantity){
 				   		// verify that we have enough units of the item 
 				   		// console.log(rows[0].price);
 				   		if (rows[0].stock_quantity >= quantity ){
-				   			var total = rows[0].price * quantity;
+				   			// Math.round(num * 100) / 100
+				   			var total = Math.round(rows[0].price * quantity * 100 )/ 100;
 							connection.query('update products set stock_quantity = stock_quantity - ? where item_id = ? and stock_quantity >= ?',[quantity, id, quantity], function(err, rows) {
 						   		if (err) throw err;
 						   		var message = "Order Successfully Placed! Total Cost: $" + total;
