@@ -1,6 +1,4 @@
 
-// var mysql =  require('mysql');
-// var constructorFile = "./products.js";
 var inquirer = require('inquirer');
 
 function verifyFile(constructorFile){
@@ -26,7 +24,8 @@ function verifyFile(constructorFile){
 function placeOrder(){
 	var currentProduct = verifyFile('./products.js');
 	// display all items in products table
-	currentProduct.readAllProducts().then(function(){
+	// pass minvalue of 0 for customer view
+	currentProduct.readAllProducts(0, "customer").then(function(){
 
 		inquirer.prompt([
 			{
@@ -47,7 +46,8 @@ function placeOrder(){
 			}
 		]).then(function(answers){
 			// order this product
-			currentProduct.setQuantityByID(answers.itemID, answers.itemQty).then(function(response){
+			// pass view === "customer" as customer orders will decrease the inventory
+			currentProduct.setQuantityByID(answers.itemID, answers.itemQty, "customer").then(function(response){
 				console.log(response);
 			}).then(function(){
 				inquirer.prompt([
