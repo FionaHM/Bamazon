@@ -25,13 +25,13 @@ var product = function(name, department, price, quantity){
 	this.getDepartments =  function(){
 		return new Promise(function(resolve, reject){
 			connection.query('select distinct(department_name) from products' , function(err, rows) {
-	   		if (err) reject(err);
-	   		console.log(rows);
-	   		var departmentsArr = [];
-	   		for (var i = 0; i < rows.length; i++){
-	   			departmentsArr.push(rows[i].department_name)
-	   		}
-	  		resolve(departmentsArr);
+		   		if (err) reject(err);
+		   		console.log(rows);
+		   		var departmentsArr = [];
+		   		for (var i = 0; i < rows.length; i++){
+		   			departmentsArr.push(rows[i].department_name)
+		   		}
+		  		resolve(departmentsArr);
 			});
 		})
 	}
@@ -40,8 +40,8 @@ var product = function(name, department, price, quantity){
 	this.saveNewProduct =  function(name, department, price, quantity){
 		return new Promise(function(resolve, reject){
 			connection.query('insert into products (product_name, department_name, price, stock_quantity )  values (?,?,?,?)', [name, department, price, quantity] , function(err, rows) {
-	   		if (err) reject(err);
-	  		resolve();
+		   		if (err) reject(err);
+		  		resolve();
 			});
 		})
 	}
@@ -89,23 +89,35 @@ var product = function(name, department, price, quantity){
 					var message = "Invalid Item ID" + id;
 				   	resolve(message);
 				} else {
-				   	connection.query('select stock_quantity, price from products where item_id = ? ',[id], function(err, rows) {
+				   	connection.query('select stock_quantity, department_name, price from products where item_id = ? ',[id], function(err, rows) {
 				   		if (err) reject(err);
 				   		if (view === "customer"){
-				   			// verify that we have enough units of the item 
+				   			// verify that we have enough units of the item ]
+				   			// console.log(rows[0].department_name);
+				   			var department = rows[0].department_name;
 					   		if (rows[0].stock_quantity >= quantity ){
 					   			// Math.round(num * 100) / 100
 					   			var total = Math.round(rows[0].price * quantity * 100 )/ 100;
 								connection.query('update products set stock_quantity = stock_quantity - ? where item_id = ? and stock_quantity >= ?',[quantity, id, quantity], function(err, rows) {
 							   		if (err) throw err;
 							   		// since we have no orders table we can just put order successful message here.
-							   		var message = "Order Successfully Placed! Total Cost: $" + total;
-							   		resolve(message);
+							   		if (rows.changedRows === 1) {
+							   			var message = "Order Successfully Placed! Total Cost: $" + total;
+							   			console.log(message);
+							   			// send back information required to update department totals
+							   			resolve([total, department]);
+							   		} else {
+							   			var message = "something went wrong with your order please contact customer services.";
+							   			// console.log(message);
+							   			reject(message);
+							   		}
+							   		// update totals in department table
+							   		
 								});
 					   		} else {
 					   			// not enough left in stock to meet order quantity
 						   		var message = "Only " + rows[0].stock_quantity + "remaining. Please order a smaller number";
-					   			resolve(message);
+					   			resolve([0, ""]);  // this is so there are no updates in the departments table
 					   		}
 
 				   		} else if (view === "manager"){
@@ -127,7 +139,12 @@ var product = function(name, department, price, quantity){
 	}
 
 	this.exit = function(){
-		connection.end();
+		// verify there is a connection before attempting to disconnect
+		if (connection){
+			// console.log(connection);
+			connection.end();
+		}
+		
 	}
 
 	// low inventory

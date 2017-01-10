@@ -8,18 +8,7 @@ function verifyFile(constructorFile){
 			var currentProduct = new product();
 			return currentProduct;
 		}
-
 }
-
-
-
-	// currentProduct.readAllProducts();
-
-// // currentProduct.readAllProducts();
-// currentProduct.saveNewProduct("Ski", "FITNESS", 100.99, 50);
-// currentProduct.getQuantityByID(5);
-// currentProduct.setQuantityByID(14, 3);
-
 
 function placeOrder(){
 	var currentProduct = verifyFile('./products.js');
@@ -48,7 +37,12 @@ function placeOrder(){
 			// order this product
 			// pass view === "customer" as customer orders will decrease the inventory
 			currentProduct.setQuantityByID(answers.itemID, answers.itemQty, "customer").then(function(response){
-				console.log(response);
+				// console.log(response);
+				var departments = verifyFile('./departments.js');
+				// var departments = require('./departments.js');
+				// console.log(response);
+				departments.updateTotalSales(response[0], response[1]);
+
 			}).then(function(){
 				inquirer.prompt([
 				{
@@ -60,6 +54,7 @@ function placeOrder(){
 					if (answers.anotherOrder === true){
 						placeOrder();
 					} else {
+						
 						currentProduct.exit();
 					}
 				}).catch(function(err){
