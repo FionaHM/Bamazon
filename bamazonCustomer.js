@@ -3,6 +3,10 @@ var inquirer = require('inquirer');
 var connection = require('./connection.js');
 var cp = require('child_process');
 
+// node package for output in a table
+require('console.table');
+
+
 // checks file exists
 function verifyFile(constructorFile){
 		var fs = require('fs');
@@ -13,12 +17,16 @@ function verifyFile(constructorFile){
 		}
 }
 
+
+
 // called when a customer tries to place anßß order
 function placeOrder(){
 	var currentProduct = verifyFile('./products.js');
 	// display all items in products table
 	// pass minvalue of 0 for customer view
-	currentProduct.readAllProducts(0, "customer").then(function(){
+	currentProduct.readAllProducts(0, "customer").then(function(response){
+		console.table(response);
+	}).then(function(){
 
 		inquirer.prompt([
 			{
@@ -62,10 +70,10 @@ function placeOrder(){
 					if (answers.anotherOrder === true){
 						placeOrder();
 					} else {
-						// go back to main entry page 
-						cp.fork(__dirname + '/bamazon.js');
 						// exit database connection
 						connection.end();
+						// go back to main entry page 
+						cp.fork(__dirname + '/bamazon.js');
 					}
 				}).catch(function(err){
 					console.log(err)

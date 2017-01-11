@@ -21,6 +21,20 @@ var departments = function(department_name, over_head_costs){
 	  		console.log("connected to database as id " + connection.threadId);
 		});
 	}
+
+	// queries departments table for all data and creates dynamic total_profit field
+	this.viewSalesByDepartment = function(){
+		return new Promise(function(resolve, reject){
+			if (!connection){
+				this.connect;
+			}
+		    connection.query('select department_id, department_name, over_head_costs, product_sales, (product_sales - over_head_costs) as total_profit from departments order by department_id asc', function(err, rows) {
+		   		if (err) reject(err);
+			   	resolve(rows);
+			});
+		})
+	}
+
 	// update with proceeds from sales
 	this.updateTotalSales = function(newsale, department){
 		// if not connected then connect to database

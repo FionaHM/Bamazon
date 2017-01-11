@@ -60,16 +60,16 @@ var product = function(name, department, price, quantity){
 		   		if (rows.length === 0 ){
 		   			reject(err);
 		   		} else {
-		   			for (var i = 0; i < rows.length; i++){
-		   				// determine what to display based on who is asking - manager or customer
-		   				if (view === "manager"){
-		   					console.log(" Item ID:  " + rows[i].item_id + " | Product Name: " + rows[i].product_name +  " | Department: " + rows[i].department_name + " | Price: $" +  rows[i].price + " | Quantity: " + rows[i].stock_quantity);
-		   				} else if (view === "customer"){
-		   					console.log(" Item ID:  " + rows[i].item_id + " | Product Name: " + rows[i].product_name +  " | Department: " + rows[i].department_name + " | Price: $" +  rows[i].price );
-		   				}
+		   // 			for (var i = 0; i < rows.length; i++){
+		   // 				// determine what to display based on who is asking - manager or customer
+		   // 				if (view === "manager"){
+		   // 					console.log(" Item ID:  " + rows[i].item_id + " | Product Name: " + rows[i].product_name +  " | Department: " + rows[i].department_name + " | Price: $" +  rows[i].price + " | Quantity: " + rows[i].stock_quantity);
+		   // 				} else if (view === "customer"){
+		   // 					console.log(" Item ID:  " + rows[i].item_id + " | Product Name: " + rows[i].product_name +  " | Department: " + rows[i].department_name + " | Price: $" +  rows[i].price );
+		   // 				}
 					
-					}
-					resolve(true);
+					// }
+					resolve(rows);
 				}
 			});
 		})
@@ -89,7 +89,8 @@ var product = function(name, department, price, quantity){
 				if (err) reject(err);
 				if (rows[0]['count(*)'] === 0){
 					var message =  "Item ID " + id + " does not exist, please enter an id from the inventory list.";
-				   	resolve(message);
+				   	console.log(message);
+				   	resolve([0, ""]);
 				} else {
 				   	connection.query('select stock_quantity, department_name, price from products where item_id = ? ',[id], function(err, rows) {
 				   		if (err) reject(err);

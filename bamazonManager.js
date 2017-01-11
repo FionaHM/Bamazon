@@ -55,6 +55,8 @@ function implementActions(answers){
 			addNewProduct(currentProduct);
 		break;
 			case "Exit Program":
+			// exit database connection
+			connection.end();
 			// go back to main file
 			cp.fork(__dirname + '/bamazon.js');
 		break;
@@ -74,9 +76,10 @@ function nextAction(){
 			if (answers.anotherAction === true){
 				managerView();
 			} else {
+				// exit database connection
+				connection.end();
 				// go back to the main program
 				cp.fork(__dirname + '/bamazon.js');
-				connection.end();
 			}
 		}).catch(function(err){
 			console.log(err);
