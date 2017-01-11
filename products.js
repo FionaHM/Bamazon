@@ -1,21 +1,12 @@
 // this module handles any action that reads from or writes to the products table.
-// var mysql =  require('mysql');
-// var connection = mysql.createConnection({
-// 	host: 'localhost',
-// 	port: 3306,
-// 	user: 'root',
-// 	password: '01B00tKamp09',  // remove before handing in!
-// 	database: 'bamazon_db'
-// });
-
+//
+// this is for the database connection module
 var connection = require('./connection.js');
-
 var product = function(name, department, price, quantity){
 	this.name = name;
 	this.department = department;
 	this.price = price;
 	this.quantity = quantity;
-
 	// verify database is available and can be connected to
 	this.connect = function(){
 		connection.connect(function(err) {
@@ -23,21 +14,24 @@ var product = function(name, department, price, quantity){
 	  		console.log("connected to database as id " + connection.threadId);
 		});
 	}
-
+	// gets unique departments in the products table - since this table was created before the departments table
+	// i use this to populate the departments table in the database_init.sql script - backwards logic i know!
 	this.getDepartments =  function(){
 		return new Promise(function(resolve, reject){
 			connection.query('select distinct(department_name) from products' , function(err, rows) {
 		   		if (err) reject(err);
 		   		var departmentsArr = [];
+		   		// store this data in an array - this can be used in the inquirer choices array
 		   		for (var i = 0; i < rows.length; i++){
 		   			departmentsArr.push(rows[i].department_name)
 		   		}
+		   		// send back the array for use in the inquirer choices menu
 		  		resolve(departmentsArr);
 			});
 		})
 	}
 
-	// add to database
+	// add new product to the database
 	this.saveNewProduct =  function(name, department, price, quantity){
 		return new Promise(function(resolve, reject){
 			connection.query('insert into products (product_name, department_name, price, stock_quantity )  values (?,?,?,?)', [name, department, price, quantity] , function(err, rows) {
@@ -47,27 +41,18 @@ var product = function(name, department, price, quantity){
 		})
 	}
 
-	// read all products
+	// read all products from products table
 	this.readAllProducts =  function(minvalue, view){
 		// check connection
 		this.connect;
-		// min value is 0 for customers - this brings back only in stock items
-		// min value is -1 for managers - this brings back all items
+		// view = "customers" and minvalue is 0 for customers - this brings back only in stock items
+		// view = "manager" and minvalue is -1 for managers - this brings back all items
 		return new Promise(function(resolve, reject){
 			connection.query('select item_id, product_name, department_name, price, stock_quantity from products group by item_id, product_name, department_name, price having stock_quantity > ?', [minvalue], function(err, rows) {
 		   		if (err) reject(err);
 		   		if (rows.length === 0 ){
 		   			reject(err);
 		   		} else {
-		   // 			for (var i = 0; i < rows.length; i++){
-		   // 				// determine what to display based on who is asking - manager or customer
-		   // 				if (view === "manager"){
-		   // 					console.log(" Item ID:  " + rows[i].item_id + " | Product Name: " + rows[i].product_name +  " | Department: " + rows[i].department_name + " | Price: $" +  rows[i].price + " | Quantity: " + rows[i].stock_quantity);
-		   // 				} else if (view === "customer"){
-		   // 					console.log(" Item ID:  " + rows[i].item_id + " | Product Name: " + rows[i].product_name +  " | Department: " + rows[i].department_name + " | Price: $" +  rows[i].price );
-		   // 				}
-					
-					// }
 					resolve(rows);
 				}
 			});

@@ -38,7 +38,17 @@ function viewSalesByDepartment(){
 	var departments = verifyFile('./departments.js');
 	departments.viewSalesByDepartment().then(function(response){
 		// put the data in a table
-		console.table(response);
+		console.log(response);
+		var prodArr = [];
+		for (var i = 0; i < response.length; i++){
+			prodArr.push({"Deparment ID": response[i].department_id,
+				"Department Name": response[i].department_name,
+				"Overhead Costs": '$' + response[i]. over_head_costs,
+				"Product Sales": '$' + response[i].product_sales,
+				"Total Profit (+) / Loss (-)": '$' + response[i].total_profit
+			});
+		}
+		console.table(prodArr);
 	}).then(function(){
 		exitApplication();
 	}).catch(function(err){

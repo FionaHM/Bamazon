@@ -1,12 +1,8 @@
-
 var inquirer = require('inquirer');
 var connection = require('./connection.js');
 var cp = require('child_process');
-
 // node package for output in a table
 require('console.table');
-
-
 // checks file exists
 function verifyFile(constructorFile){
 		var fs = require('fs');
@@ -17,15 +13,25 @@ function verifyFile(constructorFile){
 		}
 }
 
-
-
-// called when a customer tries to place anßß order
+// called when a customer tries to place an order
 function placeOrder(){
+	console.log("adfds");
 	var currentProduct = verifyFile('./products.js');
 	// display all items in products table
 	// pass minvalue of 0 for customer view
 	currentProduct.readAllProducts(0, "customer").then(function(response){
-		console.table(response);
+
+		// I dont want to display stock_levels to customer so will remove that from the response
+		var prodArr = [];
+		for (var i = 0; i < response.length; i++){
+			prodArr.push({"Item ID": response[i].item_id,
+				"Product Name": response[i].product_name,
+				"Department": response[i].department_name,
+				"Price ($)": '$' + response[i].price
+			});
+		}
+		console.table(prodArr);
+		// console.table(response);
 	}).then(function(){
 
 		inquirer.prompt([
@@ -87,6 +93,4 @@ function placeOrder(){
 }
 
 // begin here
-
-
 placeOrder();

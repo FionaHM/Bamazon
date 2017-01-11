@@ -38,8 +38,16 @@ function implementActions(answers){
 			// this option lists every available item for sale - including those with 0
 			// pass minvalue of -1 for manager view to get all products, even those with 0 inventory
 			currentProduct.readAllProducts(-1, "manager").then(function(response){	
-				console.table(response);
-				
+				var prodArr = [];
+				for (var i = 0; i < response.length; i++){
+					prodArr.push({"Item ID": response[i].item_id,
+						"Product Name": response[i].product_name,
+						"Department": response[i].department_name,
+						"Price ($)": '$' + response[i].price,
+						"Stock Level (No of Units)": response[i].stock_quantity,
+					});
+				}
+				console.table(prodArr);	
 			}).then(function(){
 				nextAction();	
 			})
