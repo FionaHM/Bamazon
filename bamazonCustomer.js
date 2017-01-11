@@ -1,6 +1,9 @@
 
 var inquirer = require('inquirer');
+var connection = require('./connection.js');
+var cp = require('child_process');
 
+// checks file exists
 function verifyFile(constructorFile){
 		var fs = require('fs');
 		if ((fs.existsSync(constructorFile))){ 
@@ -10,6 +13,7 @@ function verifyFile(constructorFile){
 		}
 }
 
+// called when a customer tries to place anßß order
 function placeOrder(){
 	var currentProduct = verifyFile('./products.js');
 	// display all items in products table
@@ -22,7 +26,10 @@ function placeOrder(){
 				name: "itemID",
 				message: "Which item would you like to order (input Item ID):",
 				validate: function(str){
-					return isNaN(str) === false;  // make sure it is a number
+					if ((str.trim().length !== 0) && (str !== "0")) { // can't be empty or 0
+						return isNaN(str) === false; // make sure it is a number
+					}	
+					  
 				},
 			},
 			{
@@ -30,19 +37,20 @@ function placeOrder(){
 				name: "itemQty",
 				message: "How many units of this item would you like to order (input quantity):",
 				validate: function(str){
-					return isNaN(str) === false;  // make sure it is a number
+					if ((str.trim().length !== 0) && (str !== "0")) {  // can't be empty or 0
+						return isNaN(str) === false; // make sure it is a number
+					}				
 				},
 			}
 		]).then(function(answers){
 			// order this product
 			// pass view === "customer" as customer orders will decrease the inventory
 			currentProduct.setQuantityByID(answers.itemID, answers.itemQty, "customer").then(function(response){
-				// console.log(response);
+				// verify the file departments.js exists and create new instance of object departments
 				var departments = verifyFile('./departments.js');
-				// var departments = require('./departments.js');
-				// console.log(response);
-				departments.updateTotalSales(response[0], response[1]);
-
+				if (response[0] !== 0 ) {
+					departments.updateTotalSales(response[0], response[1]);
+				}
 			}).then(function(){
 				inquirer.prompt([
 				{
@@ -54,8 +62,10 @@ function placeOrder(){
 					if (answers.anotherOrder === true){
 						placeOrder();
 					} else {
-						
-						currentProduct.exit();
+						// go back to main entry page 
+						cp.fork(__dirname + '/bamazon.js');
+						// exit database connection
+						connection.end();
 					}
 				}).catch(function(err){
 					console.log(err)

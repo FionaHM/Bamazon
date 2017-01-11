@@ -15,7 +15,7 @@ PRIMARY KEY (item_id)
 INSERT INTO bamazon_db.products (product_name, department_name, price, stock_quantity ) values 
 ("Treadmill", "FITNESS", 999, 500),
 ("3PCS Motion Sensor Light, Kohree Battery-Operated", "ELECTRONICS", 11.99, 1000),
-("Fireflyhome Rechargeable 4 LED Light", "ELECTRONICS", 999, 500),
+("Fireflyhome Rechargeable 4 LED Light", "ELECTRONICS", 9.99, 500),
 ("Simplete Bento Lunch Box - Set of 5", "KITCHEN", 7.80, 50),
 ("Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag", "ACCESSORIES", 39.99, 20),
 ("Kitchen Shears, Take Apart for Cleaning", "KITCHEN", 10.99, 45),
@@ -28,7 +28,7 @@ INSERT INTO bamazon_db.products (product_name, department_name, price, stock_qua
 create table bamazon_db.departments (
 department_id int auto_increment not null,
 department_name varchar(20) not null,
-over_head_costs dec(3,2) not null default 0,
+over_head_costs dec(6,2) not null default 0,
 total_sales dec(6,2) not null default 0,
 primary key(department_id)
 
@@ -46,13 +46,16 @@ select distinct(department_name) from bamazon_db.products;
 INSERT departments(department_name) SELECT DISTINCT department_name FROM bamazon_db.products;
 
 -- add overhead costs are 50% for each department
-update bamazon_db.departments set over_head_costs = 0.5 where department_id = 1;
-update bamazon_db.departments set over_head_costs = 0.3 where department_id = 2;
-update bamazon_db.departments set over_head_costs = 0.65 where department_id = 3;
-update bamazon_db.departments set over_head_costs = 0.3 where department_id = 4;
-update bamazon_db.departments set over_head_costs = 0.7 where department_id = 5;
-update bamazon_db.departments set over_head_costs = 0.8 where department_id = 6;
+update bamazon_db.departments set over_head_costs = 1000 where department_id = 1;
+update bamazon_db.departments set over_head_costs = 3000 where department_id = 2;
+update bamazon_db.departments set over_head_costs = 5000 where department_id = 3;
+update bamazon_db.departments set over_head_costs = 2000 where department_id = 4;
+update bamazon_db.departments set over_head_costs = 600 where department_id = 5;
+update bamazon_db.departments set over_head_costs = 800 where department_id = 6;
 
 select * from bamazon_db.departments;
   
 select * from bamazon_db.products;
+
+
+update departments set total_sales = total_sales + 600, product_sales = product_sales + 600 where department_id = 3

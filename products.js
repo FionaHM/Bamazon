@@ -1,12 +1,14 @@
 // this module handles any action that reads from or writes to the products table.
-var mysql =  require('mysql');
-var connection = mysql.createConnection({
-	host: 'localhost',
-	port: 3306,
-	user: 'root',
-	password: '01B00tKamp09',  // remove before handing in!
-	database: 'bamazon_db'
-});
+// var mysql =  require('mysql');
+// var connection = mysql.createConnection({
+// 	host: 'localhost',
+// 	port: 3306,
+// 	user: 'root',
+// 	password: '01B00tKamp09',  // remove before handing in!
+// 	database: 'bamazon_db'
+// });
+
+var connection = require('./connection.js');
 
 var product = function(name, department, price, quantity){
 	this.name = name;
@@ -82,11 +84,11 @@ var product = function(name, department, price, quantity){
 
 	this.setQuantityByID =  function(id, quantity, view){
 		return new Promise(function(resolve, reject){
-			// first verify id exists - even if stock 0
+			// first verify item id exists
 			connection.query('select count(*) from products where item_id = ?',[id], function(err, rows) {
 				if (err) reject(err);
 				if (rows[0]['count(*)'] === 0){
-					var message = "Invalid Item ID" + id;
+					var message =  "Item ID " + id + " does not exist, please enter an id from the inventory list.";
 				   	resolve(message);
 				} else {
 				   	connection.query('select stock_quantity, department_name, price from products where item_id = ? ',[id], function(err, rows) {
@@ -97,6 +99,7 @@ var product = function(name, department, price, quantity){
 				   			var department = rows[0].department_name;
 					   		if (rows[0].stock_quantity >= quantity ){
 					   			// Math.round(num * 100) / 100
+					  
 					   			var total = Math.round(rows[0].price * quantity * 100 )/ 100;
 								connection.query('update products set stock_quantity = stock_quantity - ? where item_id = ? and stock_quantity >= ?',[quantity, id, quantity], function(err, rows) {
 							   		if (err) throw err;
@@ -116,7 +119,8 @@ var product = function(name, department, price, quantity){
 								});
 					   		} else {
 					   			// not enough left in stock to meet order quantity
-						   		var message = "Only " + rows[0].stock_quantity + "remaining. Please order a smaller number";
+						   		var message = "Only " + rows[0].stock_quantity + " remaining. Please order "+ rows[0].stock_quantity + " units or less.";
+					   			console.log(message);
 					   			resolve([0, ""]);  // this is so there are no updates in the departments table
 					   		}
 
@@ -138,14 +142,14 @@ var product = function(name, department, price, quantity){
 		})
 	}
 
-	this.exit = function(){
-		// verify there is a connection before attempting to disconnect
-		if (connection){
-			// console.log(connection);
-			connection.end();
-		}
+	// this.exit = function(){
+	// 	// verify there is a connection before attempting to disconnect
+	// 	if (connection){
+	// 		// console.log(connection);
+	// 		connection.end();
+	// 	}
 		
-	}
+	// }
 
 	// low inventory
 	this.lowInventory =  function(minvalue){
