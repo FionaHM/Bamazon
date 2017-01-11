@@ -3,6 +3,9 @@ var inquirer = require('inquirer');
 var connection = require('./connection.js');
 var cp = require('child_process');
 
+// node package for output in a table
+require('console.table');
+
 function verifyFile(constructorFile){
 		var fs = require('fs');
 		if ((fs.existsSync(constructorFile))){ 
@@ -34,7 +37,10 @@ function implementActions(answers){
 		case "View Products for Sale":
 			// this option lists every available item for sale - including those with 0
 			// pass minvalue of -1 for manager view to get all products, even those with 0 inventory
-			currentProduct.readAllProducts(-1, "manager").then(function(){	
+			currentProduct.readAllProducts(-1, "manager").then(function(response){	
+				console.table(response);
+				
+			}).then(function(){
 				nextAction();	
 			})
 		break;
@@ -145,7 +151,7 @@ function addNewProduct(currentProduct){
 				name: "itemQty",
 				message: "How many units would you like to add?",
 				validate: function(str){
-					if ((str !== " ") && (str !== "0")) {  // can't be empty or 0
+					if ((str.trim().length !== 0) && (str !== "0")) {  // can't be empty or 0
 						return isNaN(str) === false; // make sure it is a number
 					}	
 				},
@@ -155,7 +161,7 @@ function addNewProduct(currentProduct){
 				name: "itemPrice",
 				message: "How much will each unit cost?",
 				validate: function(str){
-					if ((str !== " ") && (str !== "0")) {  // can't be empty or 0
+					if ((str.trim().length !== 0) && (str !== "0")) {  // can't be empty or 0
 						return isNaN(str) === false; // make sure it is a number
 					}	
 				},

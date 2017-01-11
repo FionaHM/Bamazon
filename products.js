@@ -28,7 +28,6 @@ var product = function(name, department, price, quantity){
 		return new Promise(function(resolve, reject){
 			connection.query('select distinct(department_name) from products' , function(err, rows) {
 		   		if (err) reject(err);
-		   		console.log(rows);
 		   		var departmentsArr = [];
 		   		for (var i = 0; i < rows.length; i++){
 		   			departmentsArr.push(rows[i].department_name)
