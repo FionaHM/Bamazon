@@ -14,12 +14,6 @@ This will bring up a menu with four options as follows:
 ![Image of Screen1.png]
 (Screenshots/Screen1.png)
 
-`? Please select an option:
-> Customer
-  Manager
-  Supervisor
-  Exit Program `
-
 
 ### Customer
 
@@ -30,25 +24,10 @@ The customer is initially presented with a view of the products in a table and t
 ![Image of Screen2.png]
 (Screenshots/Screen2.png)
 
-`? Please select an option: Customer
-Item ID  Product Name                                              Department   Price ($)
--------  --------------------------------------------------------  -----------  ---------
-1        Treadmill                                                 FITNESS      $999     
-2        3PCS Motion Sensor Light, Kohree Battery-Operated         ELECTRONICS  $11.99   
-3        Fireflyhome Rechargeable 4 LED Light                      ELECTRONICS  $9.99    
-4        Simplete Bento Lunch Box - Set of 5                       KITCHEN      $7.8     
-5        Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag  ACCESSORIES  $39.99   
-6        Kitchen Shears, Take Apart for Cleaning                   KITCHEN      $10.99   
-7        BBQ Coverpro - Waterproof BBQ Grill Cover                 HOME         $15.19   
-8        Barbie Collector Divergent Tris Doll                      TOYS         $10.15   
-9        Disney/Pixar Toy Story Talking Jessie                     TOYS         $16.17   
-10       Paw Patrol - Rescue Racer - Jungle Chase                  TOYS         $4.72    
-11       Table                                                     KITCHEN      $200.99  
+`? Which item would you like to order (input Item ID): 1`
+`? How many units of this item would you like to order (input quantity): 1`
+`Order Successfully Placed! Total Cost: $999`
 
-? Which item would you like to order (input Item ID): 1
-? How many units of this item would you like to order (input quantity): 1
-Order Successfully Placed! Total Cost: $999
-`
 When a customer places an order successfully they are presented with a confirmation message and the total cost.
 
 `Order Successfully Placed! Total Cost: $999`
@@ -59,10 +38,10 @@ If for some reason they order more than the quantity of an in-stock item, an err
 ![Image of Screen3.png]
 (Screenshots/Screen3.png)
 
-`? Which item would you like to order (input Item ID): 1
-? How many units of this item would you like to order (input quantity): 500
-Only 499 remaining. Please order 499 units or less.
-? Would you like to place another order? (Y/n) `
+`? Which item would you like to order (input Item ID): 1`
+`? How many units of this item would you like to order (input quantity): 500`
+`Only 499 remaining. Please order 499 units or less.`
+`? Would you like to place another order? (Y/n) `
 
 In the background, two tables are involved in this operation: products table and departments table. This is a view of the database before the update:
 
@@ -108,28 +87,28 @@ Exit Program `
 
 This presents the Manager with a view of all the items in the products table - it includes low or zero inventory items. It is just a SELECT command on the whole table in sql.
 
-`Item ID  Product Name                                              Department   Price ($)  Stock Level (No of Units)
--------  --------------------------------------------------------  -----------  --------- --------------------
-1        Treadmill                                                 FITNESS      $999       499                      
-2        3PCS Motion Sensor Light, Kohree Battery-Operated         ELECTRONICS  $11.99     1000                     
-3        Fireflyhome Rechargeable 4 LED Light                      ELECTRONICS  $9.99      500                      
-4        Simplete Bento Lunch Box - Set of 5                       KITCHEN      $7.8       50                       
-5        Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag  ACCESSORIES  $39.99     20                       
-6        Kitchen Shears, Take Apart for Cleaning                   KITCHEN      $10.99     45                       
-7        BBQ Coverpro - Waterproof BBQ Grill Cover                 HOME         $15.19     10                       
-8        Barbie Collector Divergent Tris Doll                      TOYS         $10.15     30                       
-9        Disney/Pixar Toy Story Talking Jessie                     TOYS         $16.17     10                       
-10       Paw Patrol - Rescue Racer - Jungle Chase                  TOYS         $4.72      100                      
+`Item ID  Product Name                                              Department   Price ($)  Stock Level (No of Units)`
+`-------  --------------------------------------------------------  -----------  --------- --------------------`
+`1        Treadmill                                                 FITNESS      $999       499                 `     
+`2        3PCS Motion Sensor Light, Kohree Battery-Operated         ELECTRONICS  $11.99     1000                    ` 
+`3        Fireflyhome Rechargeable 4 LED Light                      ELECTRONICS  $9.99      500                  `  
+`4        Simplete Bento Lunch Box - Set of 5                       KITCHEN      $7.8       50                   `    
+`5        Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag  ACCESSORIES  $39.99     20                      ` 
+`6        Kitchen Shears, Take Apart for Cleaning                   KITCHEN      $10.99     45                     `  
+`7        BBQ Coverpro - Waterproof BBQ Grill Cover                 HOME         $15.19     10                    `   
+`8        Barbie Collector Divergent Tris Doll                      TOYS         $10.15     30                     `  
+`9        Disney/Pixar Toy Story Talking Jessie                     TOYS         $16.17     10                   `    
+`10       Paw Patrol - Rescue Racer - Jungle Chase                  TOYS         $4.72      100                  `    
 
-? Would you like to carry out another action? (Y/n) (Y/n) `
+`? Would you like to carry out another action? (Y/n) (Y/n) `
 
 * View Low Inventory 
 
 This presents the Manager with a view of all the low stock items (< 5) in the products table. It is just a SELECT command in sql where the field stock_quantity < 5.
 
 If there are no items with low inventory the Manager will be presented with the message:
-` ? Please select an action from the list: View Low Inventory
-No inventory items less than 5 units.`
+` ? Please select an action from the list: View Low Inventory`
+`No inventory items less than 5 units.`
 
 Now if a customer orders 499 of item_id 1, this will deplete the inventory for item_id 1.
 ![Image of Screen8.png]
@@ -139,13 +118,13 @@ Now if a customer orders 499 of item_id 1, this will deplete the inventory for i
 (Screenshots/Screen9.png)
 
 Now as we have 0 of item 1 in the products table - this should be displayed when the Manager reselects 'View Low Inventory':
-`? Please select an action from the list: View Low Inventory
-1 item(s) with low inventory
-item_id  product_name  department_name  price  stock_quantity
--------  ------------  ---------------  -----  --------------
-1        Treadmill     FITNESS          999    0             
+`? Please select an action from the list: View Low Inventory`
+`1 item(s) with low inventory`
+`item_id  product_name  department_name  price  stock_quantity`
+`-------  ------------  ---------------  -----  --------------`
+`1        Treadmill     FITNESS          999    0             `
 
-? Would you like to carry out another action? (Y/n) Yes`
+`? Would you like to carry out another action? (Y/n) Yes`
 
 ![Image of Screen10.png]
 (Screenshots/Screen10.png)
@@ -155,10 +134,10 @@ item_id  product_name  department_name  price  stock_quantity
 This allows the manager to add new units of an existing item to the products table. It is just an UPDATE command in sql run on the stock_quantity for a specified item_id.
 
 The manger simply enters the item_id to be updated and the quantity.
-`? Input ID of the item would you like to increase stock levels: 1
-? How many units would you like to add? 100
-Successfully increased item number 1 by 100 units.
-? Would you like to carry out another action? (Y/n) (Y/n) `
+`? Input ID of the item would you like to increase stock levels: 1`
+`? How many units would you like to add? 100`
+`Successfully increased item number 1 by 100 units.`
+`? Would you like to carry out another action? (Y/n) (Y/n) `
 
 
 ![Image of Screen11.png]
@@ -177,17 +156,17 @@ The Manager must enter the following:
 - name
 - department - selected from a predefined list of existing departments.
 
-`Please enter the name of the item you wish to add? table
-? Please select the department: 
-FITNESS 
-ELECTRONICS 
-❯ KITCHEN 
-ACCESSORIES 
-HOME 
-TOYS 
-? How many units would you like to add? 150
-? How much will each unit cost? 50
-Update successful. 150 units of table added to department KITCHEN at $50 each.`
+`Please enter the name of the item you wish to add? table`
+`? Please select the department: `
+`FITNESS `
+`ELECTRONICS `
+`❯ KITCHEN `
+`ACCESSORIES `
+`HOME `
+`TOYS `
+`? How many units would you like to add? 150`
+`? How much will each unit cost? 50`
+`Update successful. 150 units of table added to department KITCHEN at $50 each.`
 
 ![Image of Screen13.png]
 (Screenshots/Screen13.png)
