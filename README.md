@@ -12,7 +12,7 @@ The application is started on the commandline as follows:
 
 This will bring up a menu with four options as follows: 
 ![Image of Screen1.tiff]
-(https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen1.tiff)
+(https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen1.png)
 
 `? Please select an option:
 > Customer
