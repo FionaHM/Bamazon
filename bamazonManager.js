@@ -6,6 +6,7 @@ var cp = require('child_process');
 // node package for output in a table
 require('console.table');
 
+// verifies that the file exists
 function verifyFile(constructorFile){
 		var fs = require('fs');
 		if ((fs.existsSync(constructorFile))){ 
@@ -15,7 +16,6 @@ function verifyFile(constructorFile){
 		}
 
 }
-
 
 function managerView(){
 	inquirer.prompt([
@@ -54,8 +54,8 @@ function implementActions(answers){
 		break;
 			case "View Low Inventory":
 			// pass minvalue of -1 for manager view to get all products, even those with 0 inventory
-			currentProduct.lowInventory(5).then(function(message){
-				console.log(message);
+			currentProduct.lowInventory(5).then(function(response){
+				console.table(response);
 			}).then(function(){
 				nextAction();	
 			})
@@ -138,7 +138,8 @@ function addToExistingInventory(currentProduct){
 
 function addNewProduct(currentProduct){
 	// get the deparments then use to populate choices
-	currentProduct.getDepartments().then(function(departmentsArr){
+	var departments = verifyFile('./departments.js');
+	departments.getDepartments().then(function(departmentsArr){
 		inquirer.prompt([
 			{
 				type: "input",

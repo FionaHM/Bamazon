@@ -3,7 +3,7 @@ var connection = require('./connection.js');
 var cp = require('child_process');
 // node package for output in a table
 require('console.table');
-// checks file exists
+// verifies that the file exists
 function verifyFile(constructorFile){
 		var fs = require('fs');
 		if ((fs.existsSync(constructorFile))){ 
@@ -15,7 +15,6 @@ function verifyFile(constructorFile){
 
 // called when a customer tries to place an order
 function placeOrder(){
-	console.log("adfds");
 	var currentProduct = verifyFile('./products.js');
 	// display all items in products table
 	// pass minvalue of 0 for customer view

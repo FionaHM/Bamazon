@@ -1,3 +1,5 @@
+drop database  bamazon_db;
+
 CREATE database bamazon_db;
  
 use bamazon_db;
@@ -27,15 +29,15 @@ INSERT INTO bamazon_db.products (product_name, department_name, price, stock_qua
 create table bamazon_db.departments (
 department_id int auto_increment not null,
 department_name varchar(20) not null,
-over_head_costs dec(6,2) not null default 0,
-total_sales dec(6,2) not null default 0,
+over_head_costs dec(9,2) not null default 0,
+total_sales dec(9,2) not null default 0,
 primary key(department_id)
 
 );
 
 -- alter table to add product_sales column
 alter table bamazon_db.departments
-add column product_sales dec(6,2) not null default 0
+add column product_sales dec(9,2) not null default 0
 after total_sales;
 
 -- get distinct departments from products
@@ -55,6 +57,7 @@ update bamazon_db.departments set over_head_costs = 800 where department_id = 6;
 select * from bamazon_db.departments;
   
 select * from bamazon_db.products;
+
 
 select department_id, department_name, over_head_costs, product_sales, (product_sales - over_head_costs) as total_profit from departments order by department_id asc
  

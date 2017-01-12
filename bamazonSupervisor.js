@@ -5,7 +5,7 @@ var connection = require('./connection.js');
 // node package for output in a table
 require('console.table');
 
-// checks file exists
+// verifies that the file exists
 function verifyFile(constructorFile){
 		var fs = require('fs');
 		if ((fs.existsSync(constructorFile))){ 
@@ -38,7 +38,6 @@ function viewSalesByDepartment(){
 	var departments = verifyFile('./departments.js');
 	departments.viewSalesByDepartment().then(function(response){
 		// put the data in a table
-		console.log(response);
 		var prodArr = [];
 		for (var i = 0; i < response.length; i++){
 			prodArr.push({"Deparment ID": response[i].department_id,

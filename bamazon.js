@@ -22,7 +22,8 @@ function startApplication(){
 				cp.fork(__dirname + '/bamazonSupervisor.js');
 			break;
 			case "Exit Program":
-				exitApplication();
+				// stops enquirer and closed the database connection
+				connection.end();
 			break;
 			default:
 			    console.log("Not a valid option");
@@ -31,22 +32,6 @@ function startApplication(){
 	})
 }
 
-function exitApplication(){
-		inquirer.prompt([{
-		type: "confirm",
-		name: "action",
-		message: "Are you sure you wish to exit?(Y/n)",
-		default: "yes"
-	}]).then(function(answers){
-		// confirm user wants to exit
-		if (answers.action === false){
-			startApplication();
-		} else {
-			// close database connection
-			connection.end();
-		}
-	})
-}
 // begin here  - this function allows the user to select whether they are a customer, supervisor or manager
 // the appropriate file is then run to allow the user to carry out actions.
 startApplication();

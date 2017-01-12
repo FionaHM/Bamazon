@@ -17,6 +17,22 @@ var departments = function(department_name, over_head_costs){
 		});
 	}
 
+	// gets all department names from departments table
+	this.getDepartments =  function(){
+		return new Promise(function(resolve, reject){
+			connection.query('select distinct(department_name) from departments' , function(err, rows) {
+		   		if (err) reject(err);
+		   		var departmentsArr = [];
+		   		// store this data in an array - this can be used in the inquirer choices array
+		   		for (var i = 0; i < rows.length; i++){
+		   			departmentsArr.push(rows[i].department_name)
+		   		}
+		   		// send back the array for use in the inquirer choices menu
+		  		resolve(departmentsArr);
+			});
+		})
+	}
+
 	// queries departments table for all data and creates dynamic total_profit field
 	this.viewSalesByDepartment = function(){
 		return new Promise(function(resolve, reject){
