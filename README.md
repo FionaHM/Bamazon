@@ -8,7 +8,7 @@ This application allows for the ordering and management of inventory, it simulat
 
 ## Usage
 The application is started on the commandline as follows:
-`> node bamazon.js`
+######`> node bamazon.js`
 
 This will bring up a menu with four options as follows: 
 ![Image of Screen1.png]
@@ -24,13 +24,13 @@ The customer is initially presented with a view of the products in a table and t
 ![Image of Screen2.png]
 (Screenshots/Screen2.png)
 
->`? Which item would you like to order (input Item ID): 1`
->`? How many units of this item would you like to order (input quantity): 1`
->`Order Successfully Placed! Total Cost: $999`
+######`? Which item would you like to order (input Item ID): 1`
+######`? How many units of this item would you like to order (input quantity): 1`
+######`Order Successfully Placed! Total Cost: $999`
 
 When a customer places an order successfully they are presented with a confirmation message and the total cost.
 
->`Order Successfully Placed! Total Cost: $999`
+######`Order Successfully Placed! Total Cost: $999`
 
 
 If for some reason they order more than the quantity of an in-stock item, an error message will appear as follows:
@@ -38,10 +38,10 @@ If for some reason they order more than the quantity of an in-stock item, an err
 ![Image of Screen3.png]
 (Screenshots/Screen3.png)
 
->`? Which item would you like to order (input Item ID): 1`
->`? How many units of this item would you like to order (input quantity): 500`
->`Only 499 remaining. Please order 499 units or less.`
->`? Would you like to place another order? (Y/n) `
+######`? Which item would you like to order (input Item ID): 1`
+######`? How many units of this item would you like to order (input quantity): 500`
+######`Only 499 remaining. Please order 499 units or less.`
+######`? Would you like to place another order? (Y/n) `
 
 In the background, two tables are involved in this operation: products table and departments table. This is a view of the database before the update:
 
@@ -87,20 +87,8 @@ This is the manager view. This allows manager to manage the products inventory c
 
 This presents the Manager with a view of all the items in the products table - it includes low or zero inventory items. It is just a SELECT command on the whole table in sql.
 
->`Item ID | Product Name | Department  | Price ($) | Stock Level (No of Units)|`
->`-------  |  --------------------------------------------------------  |  ----------- |   --------- |  -----------`
->`1    |    Treadmill    |                                             FITNESS  |    $999    |   499                 `     
->`2    |    3PCS Motion Sensor Light, Kohree Battery-Operated |         ELECTRONICS | $11.99    | 1000                    ` 
->`3    |    Fireflyhome Rechargeable 4 LED Light |                     ELECTRONICS | $9.99    |  500                  `  
->`4     |     Simplete Bento Lunch Box - Set of 5        |                 KITCHEN    |    $7.8    |     50                   `    
->`5     |     Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag  |   ACCESSORIES   | $39.99   |    20                      ` 
->`6       |   Kitchen Shears, Take Apart for Cleaning              |       KITCHEN     |   $10.99   |    45                     `    
->`7       |   BBQ Coverpro - Waterproof BBQ Grill Cover         |          HOME          | $15.19   |    10                    `   
->`8       |   Barbie Collector Divergent Tris Doll       |                 TOYS       |    $10.15  |     30                     `   
->`9      |    Disney/Pixar Toy Story Talking Jessie               |        TOYS     |      $16.17    |   10                   `    
->`10     |    Paw Patrol - Rescue Racer - Jungle Chase             |       TOYS     |      $4.72   |     100                  `     
-
->`? Would you like to carry out another action? (Y/n) (Y/n) `
+![Image of Screen7a.png]
+(Screenshots/Screen7a.png)
 
 * View Low Inventory 
 
@@ -118,13 +106,7 @@ Now if a customer orders 499 of item_id 1, this will deplete the inventory for i
 (Screenshots/Screen9.png)
 
 Now as we have 0 of item 1 in the products table - this should be displayed when the Manager reselects 'View Low Inventory':
-#####`? Please select an action from the list: View Low Inventory`
-######`1 item(s) with low inventory`
-######`item_id  product_name  department_name  price  stock_quantity`
-######`-------  ------------  ---------------  -----  --------------`
-######`1        Treadmill     FITNESS          999    0             `
 
-#####`? Would you like to carry out another action? (Y/n) Yes`
 
 ![Image of Screen10.png]
 (Screenshots/Screen10.png)
@@ -186,14 +168,9 @@ This is the Supervisor view. There is only one option: View Product Sales By Dep
 
 ######`? Please select an option: Supervisor`
 ######`? Please select an option: View Product Sales By Department`
->`Deparment ID  |Department Name  |Overhead Costs  |Product Sales  |Total Profit (+) / Loss (-)`
->`------------  |---------------  |--------------  |-------------  |---------------------------`
->`1             |FITNESS          |$1000           |$499500        |$498500                    `
->`2             |ELECTRONICS      |$3000           |$0             |$-3000                     `
->`3             |KITCHEN          |$5000           |$0             |$-5000                     `
->`4             |ACCESSORIES      |$2000           |$0             |$-2000                     `
->`5             |HOME             |$600            |$0             |$-600                      `
->`6             |TOYS             |$800            |$0             |$-800                      `
+
+![Image of Screen15.png]
+(Screenshots/Screen15.png)
 
 
 ### Exit Program
