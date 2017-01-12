@@ -1,5 +1,3 @@
-drop database  bamazon_db;
-
 CREATE database bamazon_db;
  
 use bamazon_db;
@@ -57,8 +55,3 @@ update bamazon_db.departments set over_head_costs = 800 where department_id = 6;
 select * from bamazon_db.departments;
   
 select * from bamazon_db.products;
-
-
-select department_id, department_name, over_head_costs, product_sales, (product_sales - over_head_costs) as total_profit from departments order by department_id asc
- 
-update departments set total_sales = total_sales + 600, product_sales = product_sales + 600 where department_id = 3
