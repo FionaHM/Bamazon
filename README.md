@@ -76,29 +76,29 @@ This is the manager view. This allows manager to manage the products inventory c
 ![Image of Screen7.png]
 (Screenshots/Screen7.png)
 
->`Please select an action from the list: (Use arrow keys)`
->`❯ View Products for Sale `
->`View Low Inventory `
->`Add to Inventory `
->`Add New Products `
->`Exit Program `
+#####`Please select an action from the list: (Use arrow keys)`
+######`❯ View Products for Sale `
+######`View Low Inventory `
+######`Add to Inventory `
+######`Add New Products `
+######`Exit Program `
 
 * View Products for Sale 
 
 This presents the Manager with a view of all the items in the products table - it includes low or zero inventory items. It is just a SELECT command on the whole table in sql.
 
->`Item ID  Product Name                                              Department   Price ($)  Stock Level (No of Units)`
->`-------  --------------------------------------------------------  -----------  --------- --------------------`
->`1        Treadmill                                                 FITNESS      $999       499                 `     
->`2        3PCS Motion Sensor Light, Kohree Battery-Operated         ELECTRONICS  $11.99     1000                    ` 
->`3        Fireflyhome Rechargeable 4 LED Light                      ELECTRONICS  $9.99      500                  `  
->`4        Simplete Bento Lunch Box - Set of 5                       KITCHEN      $7.8       50                   `    
->`5        Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag  ACCESSORIES  $39.99     20                      ` 
->`6        Kitchen Shears, Take Apart for Cleaning                   KITCHEN      $10.99     45                     `  
->`7        BBQ Coverpro - Waterproof BBQ Grill Cover                 HOME         $15.19     10                    `   
->`8        Barbie Collector Divergent Tris Doll                      TOYS         $10.15     30                     `  
->`9        Disney/Pixar Toy Story Talking Jessie                     TOYS         $16.17     10                   `    
->`10       Paw Patrol - Rescue Racer - Jungle Chase                  TOYS         $4.72      100                  `    
+>`Item ID | Product Name | Department  | Price ($) | Stock Level (No of Units)|`
+>`-------  |  --------------------------------------------------------  |  ----------- |   --------- |  -----------`
+>`1    |    Treadmill    |                                             FITNESS  |    $999    |   499                 `     
+>`2    |    3PCS Motion Sensor Light, Kohree Battery-Operated |         ELECTRONICS | $11.99    | 1000                    ` 
+>`3    |    Fireflyhome Rechargeable 4 LED Light |                     ELECTRONICS | $9.99    |  500                  `  
+>`4     |     Simplete Bento Lunch Box - Set of 5        |                 KITCHEN    |    $7.8    |     50                   `    
+>`5     |     Kattee Women's Pure Color Leather Hobo Tote Shoulder Bag  |   ACCESSORIES   | $39.99   |    20                      ` 
+>`6       |   Kitchen Shears, Take Apart for Cleaning              |       KITCHEN     |   $10.99   |    45                     `    
+>`7       |   BBQ Coverpro - Waterproof BBQ Grill Cover         |          HOME          | $15.19   |    10                    `   
+>`8       |   Barbie Collector Divergent Tris Doll       |                 TOYS       |    $10.15  |     30                     `   
+>`9      |    Disney/Pixar Toy Story Talking Jessie               |        TOYS     |      $16.17    |   10                   `    
+>`10     |    Paw Patrol - Rescue Racer - Jungle Chase             |       TOYS     |      $4.72   |     100                  `     
 
 >`? Would you like to carry out another action? (Y/n) (Y/n) `
 
@@ -107,8 +107,8 @@ This presents the Manager with a view of all the items in the products table - i
 This presents the Manager with a view of all the low stock items (< 5) in the products table. It is just a SELECT command in sql where the field stock_quantity < 5.
 
 If there are no items with low inventory the Manager will be presented with the message:
->` ? Please select an action from the list: View Low Inventory`
->`No inventory items less than 5 units.`
+#####` ? Please select an action from the list: View Low Inventory`
+######`No inventory items less than 5 units.`
 
 Now if a customer orders 499 of item_id 1, this will deplete the inventory for item_id 1.
 ![Image of Screen8.png]
@@ -118,13 +118,13 @@ Now if a customer orders 499 of item_id 1, this will deplete the inventory for i
 (Screenshots/Screen9.png)
 
 Now as we have 0 of item 1 in the products table - this should be displayed when the Manager reselects 'View Low Inventory':
->`? Please select an action from the list: View Low Inventory`
->`1 item(s) with low inventory`
->`item_id  product_name  department_name  price  stock_quantity`
->`-------  ------------  ---------------  -----  --------------`
->`1        Treadmill     FITNESS          999    0             `
+#####`? Please select an action from the list: View Low Inventory`
+######`1 item(s) with low inventory`
+######`item_id  product_name  department_name  price  stock_quantity`
+######`-------  ------------  ---------------  -----  --------------`
+######`1        Treadmill     FITNESS          999    0             `
 
->`? Would you like to carry out another action? (Y/n) Yes`
+#####`? Would you like to carry out another action? (Y/n) Yes`
 
 ![Image of Screen10.png]
 (Screenshots/Screen10.png)
@@ -134,10 +134,10 @@ Now as we have 0 of item 1 in the products table - this should be displayed when
 This allows the manager to add new units of an existing item to the products table. It is just an UPDATE command in sql run on the stock_quantity for a specified item_id.
 
 The manger simply enters the item_id to be updated and the quantity.
->`? Input ID of the item would you like to increase stock levels: 1`
->`? How many units would you like to add? 100`
->`Successfully increased item number 1 by 100 units.`
->`? Would you like to carry out another action? (Y/n) (Y/n) `
+######`? Input ID of the item would you like to increase stock levels: 1`
+######`? How many units would you like to add? 100`
+######`Successfully increased item number 1 by 100 units.`
+######`? Would you like to carry out another action? (Y/n) (Y/n) `
 
 
 ![Image of Screen11.png]
@@ -156,17 +156,17 @@ The Manager must enter the following:
 - name
 - department - selected from a predefined list of existing departments.
 
->`Please enter the name of the item you wish to add? table`
->`? Please select the department: `
->`FITNESS `
->`ELECTRONICS `
->`❯ KITCHEN `
->`ACCESSORIES `
->`HOME `
->`TOYS `
->`? How many units would you like to add? 150`
->`? How much will each unit cost? 50`
->`Update successful. 150 units of table added to department KITCHEN at $50 each.`
+######`Please enter the name of the item you wish to add? table`
+######`? Please select the department: `
+######`FITNESS `
+######`ELECTRONICS `
+######`❯ KITCHEN `
+######`ACCESSORIES `
+######`HOME `
+######`TOYS `
+######`? How many units would you like to add? 150`
+######`? How much will each unit cost? 50`
+######`Update successful. 150 units of table added to department KITCHEN at $50 each.`
 
 ![Image of Screen13.png]
 (Screenshots/Screen13.png)
@@ -180,20 +180,20 @@ The products table now has a new product called table as item_id = 13.
 
 This is the Supervisor view. There is only one option: View Product Sales By Department.  This runs an sql query on the departments table selecting all the fields and creating one derived filed called total_profit from product_sales - over_head_costs.
 
->`? Please select an option: Supervisor`
->`? Please select an option: (Use arrow keys)`
->`❯ View Product Sales By Department `
+#####`? Please select an option: Supervisor`
+######`? Please select an option: (Use arrow keys)`
+######`❯ View Product Sales By Department `
 
->`? Please select an option: Supervisor`
->`? Please select an option: View Product Sales By Department`
->`Deparment ID  Department Name  Overhead Costs  Product Sales  Total Profit (+) / Loss (-)`
->`------------  ---------------  --------------  -------------  ---------------------------`
->`1             FITNESS          $1000           $499500        $498500                    `
->`2             ELECTRONICS      $3000           $0             $-3000                     `
->`3             KITCHEN          $5000           $0             $-5000                     `
->`4             ACCESSORIES      $2000           $0             $-2000                     `
->`5             HOME             $600            $0             $-600                      `
->`6             TOYS             $800            $0             $-800                      `
+######`? Please select an option: Supervisor`
+######`? Please select an option: View Product Sales By Department`
+>`Deparment ID  |Department Name  |Overhead Costs  |Product Sales  |Total Profit (+) / Loss (-)`
+>`------------  |---------------  |--------------  |-------------  |---------------------------`
+>`1             |FITNESS          |$1000           |$499500        |$498500                    `
+>`2             |ELECTRONICS      |$3000           |$0             |$-3000                     `
+>`3             |KITCHEN          |$5000           |$0             |$-5000                     `
+>`4             |ACCESSORIES      |$2000           |$0             |$-2000                     `
+>`5             |HOME             |$600            |$0             |$-600                      `
+>`6             |TOYS             |$800            |$0             |$-800                      `
 
 
 ### Exit Program
@@ -212,12 +212,12 @@ node_modules folder when npm install is run.
 
 package.json should include:
 
->`"dependencies": {`
->`"inquirer": "^2.0.0"`
->`}`
+#####`"dependencies": {`
+#####`"inquirer": "^2.0.0"`
+#####`}`
 
 ###     fs
-> `var fs = require('fs');`
+##### `var fs = require('fs');`
 
 Used to for all file operations - read, write, delete, exists etc. 
 
@@ -254,5 +254,5 @@ node_modules                -	folder that contains relevant node modules
 package.json                - 	created when command ‘npm init’ is run.  Can be modified manually to include dependencies data or automatically when ‘npm install <library> --save’ is run e.g. ‘npm install inquirer --save’
 README.md                   - 	this file containing relevant operational information.
 
-*  License
+#  License
 Bamazon is released under the MIT license.
