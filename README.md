@@ -76,13 +76,6 @@ This is the manager view. This allows manager to manage the products inventory c
 ![Image of Screen7.png]
 (Screenshots/Screen7.png)
 
-#####`Please select an action from the list: (Use arrow keys)`
-######`❯ View Products for Sale `
-######`View Low Inventory `
-######`Add to Inventory `
-######`Add New Products `
-######`Exit Program `
-
 * View Products for Sale 
 
 This presents the Manager with a view of all the items in the products table - it includes low or zero inventory items. It is just a SELECT command on the whole table in sql.
@@ -153,7 +146,7 @@ The Manager must enter the following:
 ![Image of Screen13.png]
 (Screenshots/Screen13.png)
 
-The products table now has a new product called table as item_id = 13.
+The products table now has a new product called table as item_id = 11.
 
 ![Image of Screen14.png]
 (Screenshots/Screen14.png)
