@@ -11,24 +11,33 @@ function startApplication(){
 		choices: ["Customer", "Manager", "Supervisor", "Exit Program"]
 
 	}]).then(function(answers){
-		switch (answers.action){
-			case "Customer":
-				cp.fork(__dirname + '/bamazonCustomer.js');
-			break;
-			case "Manager":
-				cp.fork(__dirname + '/bamazonManager.js');
-			break;
-			case "Supervisor":
-				cp.fork(__dirname + '/bamazonSupervisor.js');
-			break;
-			case "Exit Program":
-				// stops enquirer and closed the database connection
-				connection.end();
-			break;
-			default:
-			    console.log("Not a valid option");
-		}
-
+		// verify the database is available
+		connection.connect(function(err) {
+		  	if (err) {
+		  		console.log("Database is not available - please check settings.")
+		  	} 
+		  	else {
+		  		// close the current connection - not required here.
+		  		// otherwise the connection will hang if we move forward and try to kill it later
+		  		connection.end();
+				switch (answers.action){
+					case "Customer":
+						cp.fork(__dirname + '/bamazonCustomer.js');
+					break;
+					case "Manager":
+						cp.fork(__dirname + '/bamazonManager.js');
+					break;
+					case "Supervisor":
+						cp.fork(__dirname + '/bamazonSupervisor.js');
+					break;
+					case "Exit Program":
+						// stops inquirer and closed the database connection
+					break;
+					default:
+					    console.log("Not a valid option");
+				}
+			}
+		});	
 	})
 }
 
