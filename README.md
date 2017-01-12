@@ -11,8 +11,7 @@ The application is started on the commandline as follows:
 `> node bamazon.js`
 
 This will bring up a menu with four options as follows: 
-(Screen1.tiff)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen1.tiff
+https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen1.tiff 
 
 `? Please select an option:
 > Customer
@@ -27,8 +26,7 @@ This is the customer view. This allows customers to order in-stock items from th
 
 The customer is initially presented with a view of the products in a table and then asked to select the product they with to purchase by entering the product Item ID followed by the quantity required.
 
-(Screen2 - Customer.tiff)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen2 - Customer.tiff
+https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen2 - Customer.tiff
 
 `? Please select an option: Customer
 Item ID  Product Name                                              Department   Price ($)
@@ -56,8 +54,7 @@ When a customer places an order successfully they are presented with a confirmat
 
 If for some reason they order more than the quantity of an in-stock item, an error message will appear as follows:
 
-(Screen3 - Customer Low Inventory.tiff)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen4 - Original Database.tiff
+* Screenshot -  Customer Low Inventory : https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen3.tiff 
 
 `? Which item would you like to order (input Item ID): 1
 ? How many units of this item would you like to order (input quantity): 500
@@ -68,8 +65,7 @@ In the background, two tables are involved in this operation: products table and
 
 stock_quantity for item_id 1 = 500
 
-(Screen4 - Original Database.tiff)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen4 - Initial Products table view.tiff
+* Screenshot - Initial Products table view : https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen4.tiff
 
 Here is the database after the successful update (and failed update above too):
 
@@ -77,13 +73,11 @@ stock_quantity for item_id 1 = 499.
 
 As the ordered quantity is 1, this action runs an sql UPDATE command is run on the products table setting the stock_quantity = stock_quantity - 1. Since it was 500 now it is 499.
 
-Screen5 - Products table After Order for Item 1.tiff
-/Users/FH/Assignments/Assignment10/Screenshots/Screen5 - Products table After Order for Item 1.tiff 
+* Screenshot - Products table After Order for Item 1: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen5.tiff 
 
 The other table that is modified is the departments table - the field product_sales and total_sales will be updated by $999 for the department_name "FITNESS" (in the database this is updated by department_id).  This is also achieved by an sql UPDATE command on the fields total_sales and product_sales where department_id 1.  After the update these values are now $999, from $0 initially.
 
-(Screen6 - Departments Table After Order for Item 1.tiff)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen6 - Departments Table After Order for Item 1.tiff
+* Screenshot - Departments Table After Order for Item 1: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen6.tiff
 
 The departments table did not update when the order failed due to low inventory - this is as expected.
 
@@ -93,8 +87,8 @@ After each order the user is prompted to continue to place another order or to e
 
 ### Manager
 This is the manager view. This allows manager to manage the products inventory contained in the products table.
-(Screen7)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen7 - Manager View.tiff
+
+** Screenshot **  - Manager View: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen7.tiff
 
 `Please select an action from the list: (Use arrow keys)
 ❯ View Products for Sale 
@@ -131,8 +125,8 @@ If there are no items with low inventory the Manager will be presented with the 
 No inventory items less than 5 units.`
 
 Now if a customer orders 499 of item_id 1, this will deplete the inventory for item_id 1.
-/Users/FH/Assignments/Assignment10/Screenshots/Screen8 - Department Table after ordering 499 of item 1.tiff
-/Users/FH/Assignments/Assignment10/Screenshots/Screen9 - Products Table after ordering 499 of item 1.tiff
+** Screenshot ** - Department Table after ordering 499 of item 1 : https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen8.tiff
+** Screenshot ** - Products Table after ordering 499 of item 1:  https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen9.tiff
 
 Now as we have 0 of item 1 in the products table - this should be displayed when the Manager reselects 'View Low Inventory':
 `? Please select an action from the list: View Low Inventory
@@ -143,8 +137,7 @@ item_id  product_name  department_name  price  stock_quantity
 
 ? Would you like to carry out another action? (Y/n) Yes`
 
-(Screen 10)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen10 - Manager View Low Inventory with 1 item.tiff
+ Manager View Low Inventory with 1 item: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen10.tiff
 
 * Add to Inventory 
 
@@ -157,11 +150,11 @@ Successfully increased item number 1 by 100 units.
 ? Would you like to carry out another action? (Y/n) (Y/n) `
 
 
-(Screen 11)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen11 - Manager View - Update Inventory .tiff
+** Screenshot ** - Manager View - Update Inventory: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen11.tiff
 
 In the database the stock_quantity of item_id = 100.
-/Users/FH/Assignments/Assignment10/Screenshots/Screen12 - Database View - Update Inventory .tiff
+
+** Screenshot ** - Database View - Update Inventory: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen12.tiff
 
 
 *  Add New Products
@@ -184,12 +177,11 @@ TOYS
 ? How much will each unit cost? 50
 Update successful. 150 units of table added to department KITCHEN at $50 each.`
 
-(Screen 13)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen13 - Manager View - Add Product.tiff
+
+** Screenshot **  - Manager View - Add Product: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen13.tiff
 
 The products table now has a new product called table as item_id = 13.
-(Screen 14)
-/Users/FH/Assignments/Assignment10/Screenshots/Screen14 - Database View - Add Product.tiff
+** Screenshot **  - Database View - Add Product: https://github.com/FionaHM/Bamazon/tree/master/Screenshots/Screen14.tiff
 
 
 ### Supervisor
